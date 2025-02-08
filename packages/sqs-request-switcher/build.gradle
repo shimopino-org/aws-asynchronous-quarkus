@@ -1,0 +1,20 @@
+plugins {
+    // ルートでバージョン固定済みのため version 指定不要
+    id 'io.quarkus'
+}
+
+dependencies {
+    implementation enforcedPlatform("io.quarkus:quarkus-bom:3.8.2")
+    implementation 'io.quarkus:quarkus-amazon-lambda'
+    implementation 'io.quarkus:quarkus-arc'
+    testImplementation 'io.quarkus:quarkus-junit5'
+    testImplementation 'io.rest-assured:rest-assured'
+}
+
+group = 'org.shimopino' // ルートの build.gradle と合わせる
+version = '1.0.0-SNAPSHOT' // ルートの build.gradle と合わせる
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21 // ルートの build.gradle と合わせる
+    targetCompatibility = JavaVersion.VERSION_21 // ルートの build.gradle と合わせる
+}
