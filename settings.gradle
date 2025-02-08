@@ -1,0 +1,5 @@
+rootProject.name = 'aws-asynchronous-quarkus'
+
+// サブプロジェクトのディレクトリを指定
+// include ':lambda-functions:function1'
+// include ':lambda-functions:function2' 
