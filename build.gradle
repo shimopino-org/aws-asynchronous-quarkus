@@ -1,26 +1,50 @@
+/**
+ * プラグインブロックでは、プロジェクト全体で使用するGradleプラグインを定義します。
+ * 'apply false'は、ルートプロジェクトではプラグインを適用せず、
+ * サブプロジェクトでのみ適用することを示します。
+ */
 plugins {
     id 'io.quarkus' version '3.8.2' apply false
 }
 
+/**
+ * allprojectsブロックは、ルートプロジェクトとすべてのサブプロジェクトに
+ * 共通の設定を適用します。
+ */
 allprojects {
+    // プロジェクトの識別子とバージョンを定義
     group = 'org.shimopino'
     version = '1.0.0-SNAPSHOT'
 
+    // 依存関係を解決するためのリポジトリを指定
     repositories {
-        mavenCentral()
-        mavenLocal()
+        mavenCentral()  // Maven Centralリポジトリから依存関係を取得
+        mavenLocal()    // ローカルのMavenリポジトリも使用
     }
 }
 
+/**
+ * subprojectsブロックは、すべてのサブプロジェクト（Lambda関数）に
+ * 共通の設定を適用します。ルートプロジェクトには適用されません。
+ */
 subprojects {
+    // 各サブプロジェクトにJavaプラグインとQuarkusプラグインを適用
     apply plugin: 'java'
     apply plugin: 'io.quarkus'
 
+    // Java言語のバージョン設定
     java {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
     }
 
+    /**
+     * 依存関係の定義
+     * - quarkus-bom: Quarkusの依存関係バージョンを一元管理
+     * - quarkus-amazon-lambda: AWS Lambda用のQuarkus拡張機能
+     * - quarkus-arc: QuarkusのDIコンテナ
+     * - テスト用の依存関係
+     */
     dependencies {
         implementation enforcedPlatform("io.quarkus:quarkus-bom:3.8.2")
         implementation 'io.quarkus:quarkus-amazon-lambda'
@@ -30,6 +54,7 @@ subprojects {
         testImplementation 'io.rest-assured:rest-assured'
     }
 
+    // JUnit 5をテストフレームワークとして使用
     test {
         useJUnitPlatform()
     }
