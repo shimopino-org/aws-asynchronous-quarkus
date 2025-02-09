@@ -3,5 +3,7 @@ rootProject.name = 'aws-asynchronous-quarkus'
 // サブプロジェクトのディレクトリを指定
 // モジュールの具体的な名称を指定する
 include ':sqs-request-switcher'
+include ':otel-lambda-handler'
 // 対象モジュールの場所を指定し、 fileで指定したディレクトリ上の build.gradle ファイルを読み込む
 project(':sqs-request-switcher').projectDir = file('packages/sqs-request-switcher')
+project(':otel-lambda-handler').projectDir = file('packages/otel-lambda-handler')

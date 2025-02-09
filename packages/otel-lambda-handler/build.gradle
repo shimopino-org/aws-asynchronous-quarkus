@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'io.quarkus' version '3.8.2'
+}
+
+group = 'org.shimopino'
+version = '1.0.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Quarkus AWS Lambda
+    implementation 'io.quarkus:quarkus-amazon-lambda'
+    
+    // AWS SDK v2
+    implementation platform('software.amazon.awssdk:bom:2.24.0')
+    implementation 'software.amazon.awssdk:sqs'
+    
+    // OpenTelemetry
+    implementation 'io.quarkus:quarkus-opentelemetry'
+    implementation 'io.opentelemetry:opentelemetry-extension-aws:1.34.1'
+    
+    // AWS X-Ray SDK
+    implementation 'com.amazonaws:aws-xray-recorder-sdk-core:2.14.0'
+    
+    // Testing
+    testImplementation 'io.quarkus:quarkus-junit5'
+    testImplementation 'io.rest-assured:rest-assured'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+test {
+    useJUnitPlatform()
+}
